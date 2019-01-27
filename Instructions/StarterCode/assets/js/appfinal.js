@@ -75,29 +75,61 @@ d3.csv("assets/data/data.csv")
     .attr("r", "15")
     .attr("fill", "blue")
     .attr("opacity", ".8")
-  
+    //.text("${d.abbr}");;
+
+
+
+    var gdots =  svg.selectAll("g.dot")
+            .data(data)
+            .enter().append('g');
+
+    gdots.append("circle")
+            .attr("class", "dot")
+            .attr("r", function (d) {
+                return d.r;
+            })
+            .attr("cx", function (d) {
+                return x(d.x);
+            })
+            .attr("cy", function (d) {
+                return y(d.y);
+            })
+            .style("fill", function (d) {
+                return d.c;
+            });
+            
+    gdots.append("text").text(function(d){
+                return d.abbr;
+            })
+            .attr("x", function (d) {
+                return x(d.x);
+            })
+            .attr("y", function (d) {
+                return y(d.y);
+            });
+
     // Step 6: Initialize tool tip
     // ==============================
-   var toolTip = d3.tip()
-      .attr("class", "tooltip")
-      .offset([25, 0])
-      .html(function(d) {
-        return (`${d.abbr}`);
-      });
+  //  var toolTip = d3.tip()
+    //  .attr("class", "tooltip")
+     // .offset([25, 0])
+     // .html(function(d) {
+     //   return (`${d.abbr}`);
+     // });
 
     // Step 7: Create tooltip in the chart
     // ==============================
-     chartGroup.call(toolTip);
+    // chartGroup.call(toolTip);
 
     // Step 8: Create event listeners to display and hide the tooltip
     // ==============================
-    circlesGroup.on("click", function(data) {
-      toolTip.show(data, this);
-    })
+    //circlesGroup.on("click", function(data) {
+    //  toolTip.show(data, this);
+   // })
       // onmouseout event
-      .on("mouseout", function(data, index) {
-      toolTip.hide(data);
-    });
+      //.on("mouseout", function(data, index) {
+      //  toolTip.hide(data);
+     // });
 
     // Create axes labels
     chartGroup.append("text")
