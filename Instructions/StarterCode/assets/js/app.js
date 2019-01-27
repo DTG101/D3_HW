@@ -87,7 +87,8 @@ d3.csv("assets/data/data.csv")
      .attr("x", d => xLinearScale(d.poverty))
      .attr("y", d => yLinearScale(d.healthcare)+6)
      .attr("fill", "white")
-     .attr("font-family","sans-serif");
+     .attr("font-size", "12px")
+     .attr("font-family","Arial");
   
     // Initialize tool tip... not sure if I need this
     // ==============================
